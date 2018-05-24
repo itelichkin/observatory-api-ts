@@ -1,18 +1,24 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "module": "commonjs",
-    "target": "es2016",
-    "noImplicitAny": false,
-    "sourceMap": false,
-    "outDir": "build",
     "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
     "noResolve": false,
+    "outDir": "build",
+    "removeComments": true,
+    "rootDir": "src/ts",
+    "sourceMap": false,
+    "target": "es2016",
     "typeRoots": [
       "node_modules/@types"
-    ],
-    "declaration": true
+    ]
   },
   "exclude": [
-    "node_modules"
+    "bower_components",
+    "node_modules",
+    "typings/browser",
+    "typings/browser.d.ts"
   ]
 }
