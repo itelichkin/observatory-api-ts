@@ -1,6 +1,4 @@
 {
-  "name": "Observatory server: university project",
-  "description": "University project created by Ivan Telychkin",
-  "repository": "https://github.com/itelichkin/observatory-server",
-  "keywords": ["node", "express"]
+  "name": "hello-world-node-typescript-heroku",
+  "description": "hello-world-node-typescript-heroku"
 }
