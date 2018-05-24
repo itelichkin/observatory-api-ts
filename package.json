@@ -4,9 +4,6 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch & nodemon dist",
-    "test": "tsc && mocha dist/**/*.spec.js",
-    "lint": "eslint src --ext ts",
     "start": "ts-node src/index.ts",
     "postinstall": "tsc",
     "tsc": "tsc"
