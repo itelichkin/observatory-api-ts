@@ -1,4 +1,24 @@
-import app from './src/App';
+import * as express from 'express';
+
+export class App {
+    express;
+    constructor() {
+        this.express = express();
+        this.testMethod();
+    }
+
+    testMethod() {
+        const router = express.Router();
+        router.get('/', (req, res) => {
+            res.json({
+                message: 'Hello World!'
+            })
+        });
+        this.express.use('/', router)
+    }
+}
+
+const app = new App().express;
 
 const port = process.env.PORT || 3000;
 
