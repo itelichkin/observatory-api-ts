@@ -6,7 +6,7 @@
     "sourceMap": false,
     "outDir": "build",
     "moduleResolution": "node",
-    "noResolve": true,
+    "noResolve": false,
     "typeRoots": [
       "node_modules/@types"
     ],
