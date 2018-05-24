@@ -1,7 +1,8 @@
 import * as express from 'express';
 
-class App {
-    express;
+export class App {
+    public express;
+
     constructor() {
         this.express = express();
         this.testMethod();
@@ -18,5 +19,3 @@ class App {
     }
 
 }
-
-export default new App().express;

@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 export class App {
-    express;
+    express: express.Application;
     constructor() {
         this.express = express();
         this.testMethod();
@@ -21,6 +21,8 @@ export class App {
 const app = new App().express;
 
 const port = process.env.PORT || 3000;
+
+require('./routes')(app);
 
 app.listen(port, (err) => {
     if (err) {
