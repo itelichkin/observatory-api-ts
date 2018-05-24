@@ -1,1 +1,1 @@
-web: npm start
+web: ./node_modules/.bin/tsc --module commonjs --outDir build/ --noImplicitAny --sourceMap --target ES2016 src/index.ts && node build/index.js

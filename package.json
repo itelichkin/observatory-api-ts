@@ -3,12 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch & nodemon dist",
-    "tsc": "tsc",
-    "start": "npm run serve",
-    "serve": "ts-node -- ./src/index.ts",
-    "postinstall": "npm run-script build"
+    "start": "./node_modules/.bin/tsc --module commonjs --outDir build/ --noImplicitAny --sourceMap --target ES2016 src/index.ts && node build/index.js"
   },
   "engines": {
     "node": "8.9.1",
