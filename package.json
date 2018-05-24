@@ -5,8 +5,6 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch & nodemon dist",
-    "test": "tsc && mocha dist/**/*.spec.js",
-    "lint": "eslint src --ext ts",
     "tsc": "tsc",
     "start": "npm run serve",
     "serve": "nodemon --exec ts-node -- ./src/index.ts"
