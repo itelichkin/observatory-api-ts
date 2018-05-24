@@ -7,7 +7,8 @@
     "dev": "tsc --watch & nodemon dist",
     "tsc": "tsc",
     "start": "npm run serve",
-    "serve": "ts-node -- ./src/index.ts"
+    "serve": "ts-node -- ./src/index.ts",
+    "postinstall": "npm run-script build"
   },
   "engines": {
     "node": "8.9.1",
