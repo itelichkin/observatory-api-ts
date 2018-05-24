@@ -4,7 +4,8 @@
     "target": "es2016",
     "noImplicitAny": false,
     "sourceMap": false,
-    "outDir": "build"
+    "outDir": "build",
+    "moduleResolution": "node"
   },
   "exclude": [
     "node_modules"

@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 class App {
-    express;
+    express: express.Application;
     constructor() {
         this.express = express();
         this.testMethod();
