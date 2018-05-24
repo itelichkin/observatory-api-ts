@@ -8,7 +8,6 @@
     "noResolve": false,
     "outDir": "build",
     "removeComments": true,
-    "rootDir": "src",
     "sourceMap": false,
     "target": "es2016",
     "typeRoots": [
