@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "classic",
     "noEmitOnError": true,
     "noImplicitAny": false,
     "noResolve": false,
