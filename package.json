@@ -12,7 +12,8 @@
   "engines": {
     "node": "8.9.1",
     "ts-node": "6.0.5",
-    "typescript": "2.8.3"
+    "typescript": "2.8.3",
+    "npm": "4.6.1"
   },
   "dependencies": {
     "async": "2.6.1",
