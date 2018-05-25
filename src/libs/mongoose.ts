@@ -1,13 +1,12 @@
 import * as _mongoose from 'mongoose';
-import {config} from '../config/config';
-
+const config = require('../config/config');
 
 class MongooseLib {
-    mongoose: _mongoose.Mongoose;
+    mongoose;
 
     constructor() {
-    this.mongoose = _mongoose;
-    this.mongoose.connect('mongodb://localhost/observatory')
+        this.mongoose = _mongoose;
+        this.mongoose.connect(config.mongoose.uri, config.mongoose.server);
     }
 }
 
