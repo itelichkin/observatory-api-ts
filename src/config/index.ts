@@ -1,6 +1,8 @@
 import * as path from 'path';
-import * as nconf from 'nconf';
+const nconf = require('nconf');
 
-module.exports = nconf.argv()
+nconf.argv()
     .env()
     .file({file: path.join(__dirname,'config.json')});
+
+module.exports = nconf;

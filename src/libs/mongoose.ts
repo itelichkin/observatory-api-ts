@@ -1,12 +1,12 @@
 import * as _mongoose from 'mongoose';
-const config = require('../config/config');
+const config = require('../config/index');
 
 class MongooseLib {
     mongoose;
 
     constructor() {
         this.mongoose = _mongoose;
-        this.mongoose.connect(config.mongoose.uri, config.mongoose.server);
+        this.mongoose.connect(config.get('mongoose:uri'), config.get('mongoose:options'));
     }
 }
 
