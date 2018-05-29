@@ -2,15 +2,16 @@ import * as express from 'express';
 import * as favicon from 'express-favicon';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as errorHandler from 'errorhandler';
 import * as path from 'path';
-import {HttpError} from './error/error';
-
+import {HttpError} from './error/index';
 import {Router} from 'express';
 import {NextFunction} from 'express';
 import {Request} from 'express';
 import {Response} from 'express';
 import {Application} from 'express';
 import {ObservatoryRoutes} from './routes/routes';
+import { getLogger } from './libs/log';
 
 
 export class App {
@@ -21,10 +22,11 @@ export class App {
         this.express = express();
         this.initServer();
         this.observatoryRoutes = new ObservatoryRoutes(this);
+
     }
 
     initServer() {
-        this.express.use(favicon(__dirname + '/src/public/favicon.ico'));
+        this.express.use(favicon(__dirname + '/public/favicon.ico'));
 
         if (this.express.get('env') === 'development') {
             this.express.use(morgan('dev'));
@@ -61,22 +63,29 @@ export class App {
             next();
         });
 
-
-        this.express.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-          /*  if (typeof err === 'number') {
-                err = new HttpError(err);
+        this.express.use(function (err: any, req: Request, res: Response, next: NextFunction) {
+            if (typeof err === 'number') {
+                err = new HttpError(err['message'], res.status);
             }
+            const sendHttpError = () => {
+                res.status(err.status);
+                if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+                    res.json(err);
+                } else {
+                    res.render("error", {error: err});
+                }
+            };
             if (err instanceof HttpError) {
-                res.sendHttpError(err);
+                sendHttpError();
             } else {
-                if (app.get('env') === 'development') {
+                if (this.express.get('env') === 'development') {
                     errorHandler()(err, req, res, next);
                 } else {
-                    log.error(err);
-                    err = new HttpError(500);
-                    res.sendHttpError(err);
+                    getLogger(module).error(err);
+                    err = new HttpError(err.message, 500);
+                    sendHttpError();
                 }
-            }*/
+            }
         });
 
     }

@@ -1,5 +1,5 @@
 import {App} from '../app';
-import {DataBase} from '../data-base/data-base'
+import {DataBase} from '../data-base/index'
 import {NextFunction} from 'express';
 import {Request} from 'express';
 import {Response} from 'express';
@@ -13,8 +13,6 @@ export class ObservatoryRoutes {
         this.app = app.express;
         this.observatory = new DataBase().observatory;
         this.loadRoutes(this.observatory);
-
-        console.log('constructor ObservatoryRoutes')
     }
 
     loadRoutes(observatory) {
