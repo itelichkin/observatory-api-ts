@@ -17,7 +17,11 @@ export class ObservatoryRoutes {
     loadRoutes(observatory) {
         this.globalRoute(observatory);
         this.universeRoute(observatory);
-
+        this.galaxyRoute(observatory);
+        this.systemRoute(observatory);
+        this.centralStarRoute(observatory);
+        this.planetRoute(observatory);
+        this.observerRoute(observatory);
 
     }
 
@@ -103,7 +107,6 @@ export class ObservatoryRoutes {
                 next(e)
             }
         });
-
 
 
     }

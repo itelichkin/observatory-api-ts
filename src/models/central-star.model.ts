@@ -1,35 +1,27 @@
-import {Schema} from 'mongoose';
-import * as mongoose from 'mongoose'
+import { Schema} from "mongoose";
+import { mongoose } from '../libs/mongoose';
 
+export const CentralStarsDataSchema = new Schema({
+    id: Schema.Types.ObjectId,
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    weight: Number,
+    speed: Number,
+    discoverer: String,
+    systemId: String,
+    position: {
+        x: Number,
+        y: Number
+    },
+    size: {
+        width: Number,
+        height: Number
+    },
+    type: String,
+    imageName: String
+});
 
-export class CentralStarModel {
-    private _centralStarDataSchema;
-    centralStarDataSchema;
-
-    constructor() {
-        this._centralStarDataSchema = new Schema({
-            id: Schema.Types.ObjectId,
-            name: {
-                type: String,
-                unique: true,
-                required: true
-            },
-            weight: Number,
-            speed: Number,
-            discoverer: String,
-            systemId: String,
-            position: {
-                x: Number,
-                y: Number
-            },
-            size: {
-                width: Number,
-                height: Number
-            },
-            type: String,
-            imageName: String
-        });
-        this.centralStarDataSchema = mongoose.model('CentralStarDataSchema', this._centralStarDataSchema);
-    }
-}
-
+export const CentralStarModel = mongoose.model('CentralStarsDataSchema', CentralStarsDataSchema);

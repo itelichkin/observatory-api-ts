@@ -1,32 +1,26 @@
-import {Schema} from 'mongoose';
-import * as mongoose from 'mongoose'
+import { Schema} from "mongoose";
+import { mongoose } from '../libs/mongoose';
 
 
-export class GalaxyModel {
-    private _galaxyDataSchema;
-    galaxyDataSchema;
+export const GalaxiesDataSchema = new Schema({
+    id: Schema.Types.ObjectId,
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    weight: Number,
+    speed: Number,
+    discoverer: String,
+    position: {
+        x: Number,
+        y: Number
+    },
+    diameter: String,
+    numberOfStars: String,
+    thickness: String,
+    type: String,
+});
 
-    constructor() {
-        this._galaxyDataSchema = new Schema({
-            id: Schema.Types.ObjectId,
-            name: {
-                type: String,
-                unique: true,
-                required: true
-            },
-            weight: Number,
-            speed: Number,
-            discoverer: String,
-            position: {
-                x: Number,
-                y: Number
-            },
-            diameter: String,
-            numberOfStars: String,
-            thickness: String,
-            type: String,
-        });
-        this.galaxyDataSchema = mongoose.model('GalaxyDataSchema', this._galaxyDataSchema);
-    }
-}
+export const GalaxyModel = mongoose.model('GalaxiesDataSchema', GalaxiesDataSchema);
 

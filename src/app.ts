@@ -47,7 +47,7 @@ export class App {
 
             // Website you wish to allow to connect
           //  res.setHeader('Access-Control-Allow-Origin', 'https://observatory-ui.herokuapp.com');
-            //  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+              res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
 
             // Request methods you wish to allow
             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

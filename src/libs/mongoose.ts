@@ -7,7 +7,7 @@ class MongooseLib {
 
     constructor() {
         this.mongoose = _mongoose;
-        this.mongoose.connect(config.get('mongoose:uri'), config.get('mongoose:options'));
+        this.mongoose.connect(config.get('mongooseTest:uri'), config.get('mongoose:options'));
     }
 }
 
