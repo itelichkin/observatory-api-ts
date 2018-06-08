@@ -1,4 +1,3 @@
-import * as async from 'async';
 import {mongoose} from '../libs/mongoose';
 import {Schema} from 'mongoose';
 import {UniverseModel} from '../models/universe.model';
@@ -7,6 +6,13 @@ import {SystemModel} from '../models/system.model';
 import {CentralStarModel} from '../models/central-star.model';
 import {PlanetModel} from '../models/planet.model';
 import {ObserverModel} from '../models/observer.model';
+import {UniverseSchemaType} from '../types/universe-type';
+import {GalaxySchemaType} from '../types/galaxy-type';
+import {SystemSchemaType} from '../types/system-type';
+import {StarSchemaType} from '../types/star-type';
+import {PlanetSchemaType} from '../types/planet-type';
+import {ObserverSchemaType} from '../types/observer-type';
+import {ObservatoryType} from '../types/observatory-type';
 
 
 export class DataBase {
@@ -16,14 +22,14 @@ export class DataBase {
     private centralStarsSchema: Schema;
     private planetsSchema: Schema;
     private observersSchema: Schema;
-    private universe;
-    private galaxies;
-    private systems;
-    private centralStars;
-    private planets;
-    private observers;
+    private universe: UniverseSchemaType;
+    private galaxies: GalaxySchemaType;
+    private systems: SystemSchemaType;
+    private centralStars: StarSchemaType;
+    private planets: PlanetSchemaType;
+    private observers: ObserverSchemaType;
     private observatorySchema: Schema;
-    observatory;
+    observatory: ObservatoryType;
 
     constructor() {
         this.initUniverse();
@@ -37,10 +43,10 @@ export class DataBase {
 
 
     initUniverse() {
-        const generateUniverseData = this.generateUniverseData;
+        const generateUniverseData = DataBase.generateUniverseData;
         this.universeSchema = new Schema();
         this.universeSchema.statics.getUniverse = () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 UniverseModel.find({}, function (err, res) {
                     if (err) {
                         return new Error(err)
@@ -56,7 +62,7 @@ export class DataBase {
         this.universe = mongoose.model('Universe', this.universeSchema);
     }
 
-    generateUniverseData(univ) {
+    static generateUniverseData(univ) {
         return {
             id: univ._id,
             name: univ.name,
@@ -76,11 +82,11 @@ export class DataBase {
     }
 
     initGalaxy() {
-        const generateGalaxyData = this.generateGalaxyData;
-        const generateSystemData = this.generateSystemData;
+        const generateGalaxyData = DataBase.generateGalaxyData;
+        const generateSystemData = DataBase.generateSystemData;
         this.galaxiesSchema = new Schema();
-        this.galaxiesSchema.statics.getGalaxies = function () {
-            return new Promise((resolve, reject) => {
+        this.galaxiesSchema.statics.getGalaxies = () => {
+            return new Promise((resolve) => {
                 GalaxyModel.find({}, function (err, res) {
                     if (err) {
                         return new Error(err)
@@ -96,8 +102,8 @@ export class DataBase {
                 });
             });
         };
-        this.galaxiesSchema.statics.getGalaxyById = (id) => {
-            return new Promise((resolve, reject) => {
+        this.galaxiesSchema.statics.getGalaxyById = (id: string) => {
+            return new Promise((resolve) => {
                 GalaxyModel.findOne({_id: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -110,8 +116,8 @@ export class DataBase {
                 });
             });
         };
-        this.galaxiesSchema.statics.getSystemsByGalaxyId = (id) => {
-            return new Promise((resolve, reject) => {
+        this.galaxiesSchema.statics.getSystemsByGalaxyId = (id: string) => {
+            return new Promise((resolve) => {
                 SystemModel.find({galaxyId: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -130,7 +136,7 @@ export class DataBase {
         this.galaxies = mongoose.model('Galaxies', this.galaxiesSchema);
     }
 
-    generateGalaxyData(gal) {
+    static generateGalaxyData(gal) {
         return {
             id: gal._id,
             name: gal.name,
@@ -149,13 +155,13 @@ export class DataBase {
     }
 
     initSystems() {
-        const generateSystemData = this.generateSystemData;
-        const generateStarData = this.generateStarData;
-        const generatePlanetData = this.generatePlanetData;
+        const generateSystemData = DataBase.generateSystemData;
+        const generateStarData = DataBase.generateStarData;
+        const generatePlanetData = DataBase.generatePlanetData;
         this.systemsSchema = new Schema();
 
         this.systemsSchema.statics.getSystems = () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 SystemModel.find({}, function (err, res) {
                     if (err) {
                         return new Error(err)
@@ -172,8 +178,8 @@ export class DataBase {
             });
         };
 
-        this.systemsSchema.statics.getSystemById = (id) => {
-            return new Promise((resolve, reject) => {
+        this.systemsSchema.statics.getSystemById = (id: string) => {
+            return new Promise((resolve) => {
                 SystemModel.findOne({_id: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -187,8 +193,8 @@ export class DataBase {
             });
         };
 
-        this.systemsSchema.statics.getCentralStarsBySystemId = (id) => {
-            return new Promise((resolve, reject) => {
+        this.systemsSchema.statics.getCentralStarsBySystemId = (id: string) => {
+            return new Promise((resolve) => {
                 CentralStarModel.find({systemId: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -205,7 +211,7 @@ export class DataBase {
         };
 
         this.systemsSchema.statics.getPlanetsBySystemId = (id) => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 PlanetModel.find({systemId: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -224,7 +230,7 @@ export class DataBase {
         this.systems = mongoose.model('Systems', this.systemsSchema);
     }
 
-    generateSystemData(sys) {
+    static generateSystemData(sys) {
         return {
             id: sys._id,
             name: sys.name,
@@ -249,10 +255,10 @@ export class DataBase {
     }
 
     initCentralStars() {
-        const generateStarData = this.generateStarData;
+        const generateStarData = DataBase.generateStarData;
         this.centralStarsSchema = new Schema();
         this.centralStarsSchema.statics.getCentralStars = () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 CentralStarModel.find({}, function (err, res) {
                     if (err) {
                         return new Error(err)
@@ -269,8 +275,8 @@ export class DataBase {
             });
         };
 
-        this.centralStarsSchema.statics.getCentralStarById = (id) => {
-            return new Promise((resolve, reject) => {
+        this.centralStarsSchema.statics.getCentralStarById = (id: string) => {
+            return new Promise((resolve) => {
                 CentralStarModel.findOne({_id: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -286,7 +292,7 @@ export class DataBase {
         this.centralStars = mongoose.model('CentralStars', this.centralStarsSchema);
     }
 
-    generateStarData(center) {
+    static generateStarData(center) {
         return {
             id: center._id,
             name: center.name,
@@ -308,10 +314,10 @@ export class DataBase {
     }
 
     initPlanets() {
-        const generatePlanetData = this.generatePlanetData;
+        const generatePlanetData = DataBase.generatePlanetData;
         this.planetsSchema = new Schema();
         this.planetsSchema.statics.getPlanets = () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 PlanetModel.find({}, function (err, res) {
                     if (err) {
                         return new Error(err)
@@ -328,8 +334,8 @@ export class DataBase {
             });
         };
 
-        this.planetsSchema.statics.getPlanetById = (id) => {
-            return new Promise((resolve, reject) => {
+        this.planetsSchema.statics.getPlanetById = (id: string) => {
+            return new Promise((resolve) => {
                 PlanetModel.findOne({_id: id}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -345,7 +351,7 @@ export class DataBase {
         this.planets = mongoose.model('Planets', this.planetsSchema);
     }
 
-    generatePlanetData(plan) {
+    static generatePlanetData(plan) {
         return {
             id: plan._id,
             name: plan.name,
@@ -373,7 +379,7 @@ export class DataBase {
     initObservers() {
         this.observersSchema = new Schema();
         this.observersSchema.statics.getObservers = () => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 ObserverModel.find({}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -396,7 +402,7 @@ export class DataBase {
         this.observersSchema.statics.setObservers = (data) => {
             const observerId = data['observerId'];
             const planetId = data['planetId'];
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 ObserverModel.findOne({_id: observerId}, function (err, data) {
                     if (err) {
                         return new Error(err)
@@ -463,12 +469,13 @@ export class DataBase {
         });
 
         this.observatorySchema.methods.getAllSpaceObjects = async () => {
+            const result = [];
             const universe = [await this.observatory.universe.getUniverse()];
             const galaxies = await this.observatory.galaxies.getGalaxies();
             const systems = await this.observatory.systems.getSystems();
             const centralStars = await this.observatory.centralStars.getCentralStars();
             const planets = await this.observatory.planets.getPlanets();
-            return universe.concat(galaxies, systems, centralStars, planets);
+            return result.concat(universe, galaxies, systems, centralStars, planets);
         };
 
         this.observatorySchema.methods.getObjectById = async (id, type) => {
@@ -559,16 +566,16 @@ export class DataBase {
     }
 
     async getSpaceObject(id, type, callBack) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             let object = null;
             switch (type) {
                 case 'Universe':
-                    const generateUniverseData = this.generateUniverseData;
+                    const generateUniverseData = DataBase.generateUniverseData;
                     const universe = await this.observatory.universe.getUniverse();
                     if (universe.id.toString() === id.toString()) object = generateUniverseData(universe);
                     break;
                 case 'Galaxy':
-                    const generateGalaxyData = this.generateGalaxyData;
+                    const generateGalaxyData = DataBase.generateGalaxyData;
                     await GalaxyModel.findOne({_id: id}, function (err, data) {
                         if (err) {
                             return new Error(err)
@@ -585,7 +592,7 @@ export class DataBase {
                     });
                     break;
                 case 'System':
-                    const generateSystemData = this.generateSystemData;
+                    const generateSystemData = DataBase.generateSystemData;
                     await SystemModel.findOne({_id: id}, function (err, data) {
                         if (err) {
                             return new Error(err)
@@ -602,7 +609,7 @@ export class DataBase {
                     });
                     break;
                 case 'Star':
-                    const generateStarData = this.generateStarData;
+                    const generateStarData = DataBase.generateStarData;
                     await CentralStarModel.findOne({_id: id}, function (err, data) {
                         if (err) {
                             return new Error(err)
@@ -619,7 +626,7 @@ export class DataBase {
                     });
                     break;
                 case 'Planet':
-                    const generatePlanetData = this.generatePlanetData;
+                    const generatePlanetData = DataBase.generatePlanetData;
                     await PlanetModel.findOne({_id: id}, function (err, data) {
                         if (err) {
                             return new Error(err)

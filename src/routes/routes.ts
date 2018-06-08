@@ -3,18 +3,18 @@ import {DataBase} from '../data-base/index'
 import {NextFunction} from 'express';
 import {Request} from 'express';
 import {Response} from 'express';
-
+import {ObservatoryType} from '../types/observatory-type';
 
 export class ObservatoryRoutes {
     public app;
 
     constructor(app: App) {
         this.app = app.express;
-        const observatory = new DataBase().observatory;
+        const observatory: ObservatoryType = new DataBase().observatory;
         this.loadRoutes(observatory);
     }
 
-    loadRoutes(observatory) {
+    loadRoutes(observatory: ObservatoryType) {
         this.globalRoute(observatory);
         this.universeRoute(observatory);
         this.galaxyRoute(observatory);
@@ -22,10 +22,9 @@ export class ObservatoryRoutes {
         this.centralStarRoute(observatory);
         this.planetRoute(observatory);
         this.observerRoute(observatory);
-
     }
 
-    globalRoute(observatory) {
+    globalRoute(observatory: ObservatoryType) {
         this.app.get('/space-objects', async function (req: Request, res: Response, next: NextFunction) {
             let allObjects;
             try {
@@ -111,7 +110,7 @@ export class ObservatoryRoutes {
 
     }
 
-    universeRoute(observatory) {
+    universeRoute(observatory: ObservatoryType) {
         this.app.get('/universe', async function (req, res, next) {
             let universe;
             try {
@@ -123,7 +122,7 @@ export class ObservatoryRoutes {
         });
     }
 
-    galaxyRoute(observatory) {
+    galaxyRoute(observatory: ObservatoryType) {
         this.app.get('/galaxies', async function (req, res, next) {
             let galaxies;
             try {
@@ -175,7 +174,7 @@ export class ObservatoryRoutes {
         });
     }
 
-    systemRoute(observatory) {
+    systemRoute(observatory: ObservatoryType) {
         this.app.get('/systems', async function (req, res, next) {
             let systems;
             try {
@@ -247,7 +246,7 @@ export class ObservatoryRoutes {
         });
     }
 
-    centralStarRoute(observatory) {
+    centralStarRoute(observatory: ObservatoryType) {
         this.app.get('/central-star/', async function (req, res, next) {
             const id = req.query.id;
             if (!id) {
@@ -279,7 +278,7 @@ export class ObservatoryRoutes {
         });
     }
 
-    planetRoute(observatory) {
+    planetRoute(observatory: ObservatoryType) {
         this.app.get('/planets', async function (req, res, next) {
             let planets;
             try {
@@ -311,7 +310,7 @@ export class ObservatoryRoutes {
         });
     }
 
-    observerRoute(observatory) {
+    observerRoute(observatory: ObservatoryType) {
         this.app.get('/observers', async function (req, res, next) {
             let observers;
             try {
@@ -333,7 +332,4 @@ export class ObservatoryRoutes {
         });
     }
 
-
 }
-
-
