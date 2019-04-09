@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "tsc": "tsc",
-    "precleanstart": "node cleaa.js",
-    "cleanstart": "npm start",
-    "prestart": "npm run tsc",
-    "start": "ts-node server.ts"
+    "build": "tsc",
+    "preinstall": "node clean.js",
+    "start": "ts-node server.ts",
+    "postinstall": "tsc",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/winston": "2.4.4",
