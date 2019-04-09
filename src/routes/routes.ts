@@ -42,9 +42,9 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send(!id ? 'No id' : 'No type');
                 return;
-            } else if (typeof  id !== 'string' || typeof  type !== 'string') {
+            } else if (typeof id !== 'string' || typeof type !== 'string') {
                 res.status(400);
-                res.send(typeof  id !== 'string' ? 'Id is not a string' : 'Type is not a string');
+                res.send(typeof id !== 'string' ? 'Id is not a string' : 'Type is not a string');
                 return;
             }
             let object;
@@ -63,9 +63,9 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send(!id ? 'No id' : 'No type');
                 return;
-            } else if (typeof  id !== 'string' || typeof  type !== 'string') {
+            } else if (typeof id !== 'string' || typeof type !== 'string') {
                 res.status(400);
-                res.send(typeof  id !== 'string' ? 'Id is not a string' : 'Type is not a string');
+                res.send(typeof id !== 'string' ? 'Id is not a string' : 'Type is not a string');
                 return;
             }
             let object;
@@ -139,7 +139,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -159,7 +159,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -191,7 +191,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -211,7 +211,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -231,7 +231,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -253,7 +253,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;
@@ -295,7 +295,7 @@ export class ObservatoryRoutes {
                 res.status(400);
                 res.send('No id');
                 return;
-            } else if (typeof  id !== 'string') {
+            } else if (typeof id !== 'string') {
                 res.status(400);
                 res.send('Id is not a string');
                 return;

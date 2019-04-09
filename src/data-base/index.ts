@@ -573,6 +573,7 @@ export class DataBase {
                     const generateUniverseData = DataBase.generateUniverseData;
                     const universe = await this.observatory.universe.getUniverse();
                     if (universe.id.toString() === id.toString()) object = generateUniverseData(universe);
+                    resolve(object);
                     break;
                 case 'Galaxy':
                     const generateGalaxyData = DataBase.generateGalaxyData;
@@ -588,6 +589,7 @@ export class DataBase {
                             } else {
                                 object = null;
                             }
+                            resolve(object);
                         }
                     });
                     break;
@@ -605,6 +607,7 @@ export class DataBase {
                             } else {
                                 object = null;
                             }
+                            resolve(object);
                         }
                     });
                     break;
@@ -622,6 +625,7 @@ export class DataBase {
                             } else {
                                 object = null;
                             }
+                            resolve(object);
                         }
                     });
                     break;
@@ -639,13 +643,13 @@ export class DataBase {
                             } else {
                                 object = null;
                             }
+                            resolve(object);
                         }
                     });
                     break;
                 default:
-                    object = null;
+                    resolve(null);
             }
-            resolve(object)
         });
     }
 }
