@@ -6,13 +6,16 @@ export function getLogger(module) {
 
     const path = module.filename.split('/').slice(-2).join('/');
 
-    return new winston.Logger({
+    return winston.createLogger({
+        level: (ENV === 'development') ? 'debug' : 'error',
         transports: [
             new winston.transports.Console({
-                colorize: true,
-                level: (ENV === 'development') ? 'debug' : 'error',
-                label: path
-            })
+                format: winston.format.combine(
+                    winston.format.label(path),
+                    winston.format.colorize({message: true}),
+                    winston.format.simple()
+                )
+            }),
         ]
     });
 }
