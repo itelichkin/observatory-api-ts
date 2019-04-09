@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "preinstall": "node clear.js",
-    "start": "ts-node server.ts",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "precleanstart": "node clean.js",
+    "cleanstart": "npm start",
+    "prestart": "npm run tsc",
+    "start": "ts-node server.ts"
   },
   "dependencies": {
     "@types/winston": "2.4.4",
